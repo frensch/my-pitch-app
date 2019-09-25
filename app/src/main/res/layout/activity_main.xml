@@ -6,36 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/chart1"
-        android:layout_width="368dp"
-        android:layout_height="250dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
-
-    </com.github.mikephil.charting.charts.LineChart>
-
-    <TextView
-        android:id="@+id/text_view_note"
+    <Button
+        android:id="@+id/note_c2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Note!"
-        android:textSize="100sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="C2"
+        app:layout_constraintBottom_toTopOf="@+id/note_c3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="64dp"
+        tools:ignore="MissingConstraints" />
 
-    <TextView
-        android:id="@+id/text_view_pitch"
+    <Button
+        android:id="@+id/note_c3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="Pitch!"
-        android:textSize="30sp"
+        android:text="C3"
+        app:layout_constraintBottom_toTopOf="@+id/note_c4"
+        app:layout_constraintStart_toStartOf="@+id/note_c2"
+        app:layout_constraintTop_toBottomOf="@+id/note_c2" />
+
+    <Button
+        android:id="@+id/note_c4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C4"
+        app:layout_constraintBottom_toTopOf="@+id/note_c5"
+        app:layout_constraintStart_toStartOf="@+id/note_c3"
+        app:layout_constraintTop_toBottomOf="@+id/note_c3" />
+
+    <Button
+        android:id="@+id/note_c5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="C5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/note_c4"
+        app:layout_constraintTop_toBottomOf="@+id/note_c4" />
+
+    <TextView
+        android:id="@+id/textViewC2"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/note_bad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_c2"
+        app:layout_constraintTop_toTopOf="@+id/note_c2" />
+
+
+    <TextView
+        android:id="@+id/textViewC5"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/note_bad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/note_c5"
+        app:layout_constraintTop_toTopOf="@+id/note_c5" />
+
+    <TextView
+        android:id="@+id/textViewC4"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/note_bad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toEndOf="@+id/note_c4"
+        app:layout_constraintTop_toTopOf="@+id/note_c4" />
+
+    <TextView
+        android:id="@+id/textViewC3"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:layout_width="134dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/note_bad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/note_c3"
+        app:layout_constraintTop_toTopOf="@+id/note_c3" />
 
 </android.support.constraint.ConstraintLayout>
