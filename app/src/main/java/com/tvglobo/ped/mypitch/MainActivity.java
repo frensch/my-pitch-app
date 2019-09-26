@@ -3,37 +3,13 @@ package com.tvglobo.ped.mypitch;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
-
-
-import be.tarsos.dsp.AudioDispatcher;
-import be.tarsos.dsp.AudioEvent;
-import be.tarsos.dsp.AudioProcessor;
-import be.tarsos.dsp.io.android.AudioDispatcherFactory;
-import be.tarsos.dsp.pitch.PitchDetectionHandler;
-import be.tarsos.dsp.pitch.PitchDetectionResult;
-import be.tarsos.dsp.pitch.PitchProcessor;
-
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.softmoore.android.graphlib.Function;
-import com.softmoore.android.graphlib.Graph;
-import com.softmoore.android.graphlib.GraphView;
-import com.softmoore.android.graphlib.Label;
-import com.softmoore.android.graphlib.Point;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,11 +21,37 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         requestAudioPermissions();
+
+        Button buttonC2 = findViewById(R.id.note_c2);
+        buttonC2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startMain("C2");
+            }
+        });
+        Button buttonC3 = findViewById(R.id.note_c3);
+        buttonC3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startMain("C3");
+            }
+        });
+        Button buttonC4 = findViewById(R.id.note_c4);
+        buttonC4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startMain("C4");
+            }
+        });
+        Button buttonC5 = findViewById(R.id.note_c5);
+        buttonC5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startMain("C5");
+            }
+        });
+
     }
 
-    private void startMain() {
+    private void startMain(String note) {
         Intent intent = new Intent(this, TuneTest.class);
-        String message = "C2";
+        String message = note;
         intent.putExtra(NOTE_PITCH, message);
         startActivity(intent);
     }
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Go ahead with recording audio now
-            startMain();
+            //startMain("c2");
         }
     }
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay!
-                    startMain();
+                    //startMain();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.

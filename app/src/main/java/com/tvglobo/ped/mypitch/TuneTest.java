@@ -55,10 +55,19 @@ public class TuneTest extends AppCompatActivity {
 
         Intent intent = getIntent();
         noteToTest = intent.getStringExtra(MainActivity.NOTE_PITCH);
-        noteIndex = Arrays.binarySearch(notes, noteToTest);
+        //noteIndex = Arrays.binarySearch(notes, noteToTest);
+        int noteIndex = -1;
+        for (int i = 0; i < notes.length; ++i) {
+            if (noteToTest.equals(notes[i])) {
+                noteIndex = i;
+                break;
+            }
+        }
         int range = 4;
-        noteMaxFreq = freqs[(noteIndex + range < freqs.length ? noteIndex + range : freqs.length - 1)];
-        noteMinFreq = freqs[(noteIndex - range >= freqs.length ? noteIndex - range : 0)];
+        int maxIndex = (noteIndex + range < freqs.length ? noteIndex + range : freqs.length - 1);
+        noteMaxFreq = freqs[maxIndex];
+        int minIndex = (noteIndex - range >= freqs.length ? noteIndex - range : 0);
+        noteMinFreq = freqs[minIndex];
         noteText.setText(noteToTest + " " + freqs[noteIndex] + " " + noteMinFreq + " " + noteMaxFreq);
 
         getPitch();
@@ -120,7 +129,6 @@ public class TuneTest extends AppCompatActivity {
         mChart.setDrawBorders(false);
 
         feedMultiple();
-
     }
 
     private void addValue(float value) {
@@ -150,6 +158,10 @@ public class TuneTest extends AppCompatActivity {
 
             // move to the latest entry
             mChart.moveViewToX(data.getEntryCount());
+
+            YAxis leftAxis = mChart.getAxisLeft();
+            leftAxis.setAxisMaximum(noteMaxFreq >  value ? noteMaxFreq : value);
+            leftAxis.setAxisMinimum(noteMinFreq < value ? noteMinFreq : value);
 
         }
     }
