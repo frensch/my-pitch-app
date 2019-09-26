@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -28,8 +29,8 @@ import be.tarsos.dsp.pitch.PitchProcessor;
 public class TuneTest extends AppCompatActivity {
     AudioDispatcher dispatcher = null;
 
-    String[] notes = {"C2","C#2","D2","D#2","E2","F2","F#2","G2","G#2","A2","A#2","B2","C3","C#3","D3","D#3","E3","F3","F#3","G3","G#3","A3","A#3","B3","C4","C#4","D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4","C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5"};
-    Float[] freqs = {65.41f, 69.30f, 73.42f, 77.78f, 82.41f, 87.31f, 92.50f, 98.00f, 103.83f, 110.00f, 116.54f, 123.47f, 130.81f, 138.59f, 146.83f, 155.56f, 164.81f, 174.61f, 185.00f, 196.00f, 207.65f, 220.00f, 233.08f, 246.94f, 261.63f, 277.18f, 293.66f, 311.13f, 329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f, 493.88f, 523.25f, 554.37f, 587.33f, 622.25f, 659.25f, 698.46f, 739.99f, 783.99f, 830.61f, 880.00f, 932.33f, 987.77f};
+    String[] notes = {"C2",   "C#2",  "D2",   "D#2",  "E2",   "F2",   "F#2",  "G2",  "G#2",    "A2",    "A#2",   "B2",    "C3",    "C#3",   "D3",    "D#3",   "E3",    "F3",    "F#3",   "G3",    "G#3",   "A3",    "A#3",   "B3",    "C4",    "C#4",   "D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4","C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5"};
+    Float[] freqs = { 65.41f, 69.30f, 73.42f, 77.78f, 82.41f, 87.31f, 92.50f, 98.00f, 103.83f, 110.00f, 116.54f, 123.47f, 130.81f, 138.59f, 146.83f, 155.56f, 164.81f, 174.61f, 185.00f, 196.00f, 207.65f, 220.00f, 233.08f, 246.94f, 261.63f, 277.18f, 293.66f, 311.13f, 329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f, 493.88f, 523.25f, 554.37f, 587.33f, 622.25f, 659.25f, 698.46f, 739.99f, 783.99f, 830.61f, 880.00f, 932.33f, 987.77f};
     TextView pitchText;
     TextView noteText;
 
@@ -48,7 +49,6 @@ public class TuneTest extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tune_test);
 
-        onCreateChart();
 
         noteText = (TextView) findViewById(R.id.text_view_note);
         pitchText = (TextView) findViewById(R.id.text_view_pitch);
@@ -56,24 +56,33 @@ public class TuneTest extends AppCompatActivity {
         Intent intent = getIntent();
         noteToTest = intent.getStringExtra(MainActivity.NOTE_PITCH);
         //noteIndex = Arrays.binarySearch(notes, noteToTest);
-        int noteIndex = -1;
+        noteIndex = -1;
         for (int i = 0; i < notes.length; ++i) {
             if (noteToTest.equals(notes[i])) {
                 noteIndex = i;
                 break;
             }
         }
+        noteFreq = freqs[noteIndex];
         int range = 4;
         int maxIndex = (noteIndex + range < freqs.length ? noteIndex + range : freqs.length - 1);
         noteMaxFreq = freqs[maxIndex];
-        int minIndex = (noteIndex - range >= freqs.length ? noteIndex - range : 0);
+        int minIndex = (noteIndex - range >= 0 ? noteIndex - range : 0);
         noteMinFreq = freqs[minIndex];
         noteText.setText(noteToTest + " " + freqs[noteIndex] + " " + noteMinFreq + " " + noteMaxFreq);
 
+        onCreateChart();
         getPitch();
     }
-
-
+    protected void addLimitLine(float freq, String name, int color) {
+        LimitLine ll = new LimitLine(freq, name);
+        ll.setLineWidth(1f);
+        //ll.enableDashedLine(10f, 10f, 0f);
+        ll.setLabelPosition(LimitLine.LimitLabelPosition.RIGHT_TOP);
+        ll.setTextSize(10f);
+        ll.setLineColor(getApplicationContext().getResources().getColor(color));
+        mChart.getAxisLeft().addLimitLine(ll);
+    }
     protected void onCreateChart() {
 
         mChart = (LineChart) findViewById(R.id.chart1);
@@ -127,6 +136,14 @@ public class TuneTest extends AppCompatActivity {
         mChart.getAxisLeft().setDrawGridLines(false);
         mChart.getXAxis().setDrawGridLines(false);
         mChart.setDrawBorders(false);
+
+
+        leftAxis.removeAllLimitLines(); // reset all limit lines to avoid overlapping lines
+        addLimitLine(freqs[noteIndex-1], notes[noteIndex-1],R.color.colorBad );
+        //addLimitLine((noteFreq+freqs[noteIndex-1])/2, "limit",R.color.colorBad );
+        addLimitLine(noteFreq, noteToTest, R.color.colorGood);
+        //addLimitLine((noteFreq+freqs[noteIndex+1])/2, "limit", R.color.colorBad);
+        addLimitLine(freqs[noteIndex+1], notes[noteIndex+1], R.color.colorBad);
 
         feedMultiple();
     }
