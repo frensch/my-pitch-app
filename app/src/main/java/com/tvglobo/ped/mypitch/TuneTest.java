@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -16,6 +18,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -31,6 +34,9 @@ public class TuneTest extends AppCompatActivity {
 
     String[] notes = {"C2",   "C#2",  "D2",   "D#2",  "E2",   "F2",   "F#2",  "G2",  "G#2",    "A2",    "A#2",   "B2",    "C3",    "C#3",   "D3",    "D#3",   "E3",    "F3",    "F#3",   "G3",    "G#3",   "A3",    "A#3",   "B3",    "C4",    "C#4",   "D4","D#4","E4","F4","F#4","G4","G#4","A4","A#4","B4","C5","C#5","D5","D#5","E5","F5","F#5","G5","G#5","A5","A#5","B5"};
     Float[] freqs = { 65.41f, 69.30f, 73.42f, 77.78f, 82.41f, 87.31f, 92.50f, 98.00f, 103.83f, 110.00f, 116.54f, 123.47f, 130.81f, 138.59f, 146.83f, 155.56f, 164.81f, 174.61f, 185.00f, 196.00f, 207.65f, 220.00f, 233.08f, 246.94f, 261.63f, 277.18f, 293.66f, 311.13f, 329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f, 493.88f, 523.25f, 554.37f, 587.33f, 622.25f, 659.25f, 698.46f, 739.99f, 783.99f, 830.61f, 880.00f, 932.33f, 987.77f};
+    Button buttonRec;
+    Button buttonTone;
+
     TextView pitchText;
     TextView noteText;
 
@@ -44,17 +50,42 @@ public class TuneTest extends AppCompatActivity {
     private float noteFreq;
     private float noteMaxFreq;
     private float noteMinFreq;
+    private boolean recValues = false;
+    private ArrayList<Float> valuesSaved = new ArrayList<Float>();
+    private PlayTone playTone = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tune_test);
 
 
-        noteText = (TextView) findViewById(R.id.text_view_note);
-        pitchText = (TextView) findViewById(R.id.text_view_pitch);
-
         Intent intent = getIntent();
         noteToTest = intent.getStringExtra(MainActivity.NOTE_PITCH);
+
+
+        noteText = findViewById(R.id.text_view_note);
+        pitchText = findViewById(R.id.text_view_pitch);
+        buttonRec = findViewById(R.id.buttonRec);
+        buttonRec.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                recValues = !recValues;
+                if(recValues)
+                    buttonRec.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.colorBad));
+                else
+                    buttonRec.setBackgroundColor(getApplicationContext().getResources().getColor(R.color.colorPrimary));
+            }
+        });
+
+        buttonTone = findViewById(R.id.buttonTone);
+        buttonTone.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(recValues)
+                    buttonRec.callOnClick();
+                playTone.play();
+            }
+        });
+
         //noteIndex = Arrays.binarySearch(notes, noteToTest);
         noteIndex = -1;
         for (int i = 0; i < notes.length; ++i) {
@@ -64,6 +95,7 @@ public class TuneTest extends AppCompatActivity {
             }
         }
         noteFreq = freqs[noteIndex];
+        playTone = new PlayTone(noteFreq);
         int range = 4;
         int maxIndex = (noteIndex + range < freqs.length ? noteIndex + range : freqs.length - 1);
         noteMaxFreq = freqs[maxIndex];
@@ -236,7 +268,14 @@ public class TuneTest extends AppCompatActivity {
         if(plotData){
             addValue(value);
             plotData = false;
+            if (recValues)
+                addRecValue(value);
+
         }
+    }
+
+    private void addRecValue(float value) {
+        valuesSaved.add(value);
     }
 
 
