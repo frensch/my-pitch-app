@@ -1,4 +1,4 @@
-package com.tvglobo.ped.mypitch;
+package com.frensch.mypitch;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.tvglobo.ped.mypitch", appContext.getPackageName());
+        assertEquals("com.frensch.mypitch", appContext.getPackageName());
     }
 }

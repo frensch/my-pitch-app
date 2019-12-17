@@ -1,4 +1,4 @@
-package com.tvglobo.ped.mypitch;
+package com.frensch.mypitch;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;

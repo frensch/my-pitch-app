@@ -4,98 +4,195 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@drawable/bg1"
     tools:context=".MainActivity">
 
-    <Button
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/note_c2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="C2"
+        android:layout_width="match_parent"
+        android:layout_height="140sp"
+        android:clickable="true"
+        android:focusable="false"
+        android:layout_marginTop="50sp"
+        android:background="@color/itemBG"
         app:layout_constraintBottom_toTopOf="@+id/note_c3"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="64dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
+        <TextView
+            android:id="@+id/textC2"
+            android:fontFamily="cursive"
+            android:textSize="50sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/octave2"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/statusC2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statusC2"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="43sp"
+            android:layout_marginTop="80sp"
+            android:gravity="center"
+            android:text="@string/note_bad"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/note_c3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="C3"
+        android:layout_width="match_parent"
+        android:layout_height="140sp"
+        android:clickable="true"
+        android:focusable="false"
+        android:layout_marginTop="12sp"
+        android:background="@color/itemBG"
         app:layout_constraintBottom_toTopOf="@+id/note_c4"
-        app:layout_constraintStart_toStartOf="@+id/note_c2"
-        app:layout_constraintTop_toBottomOf="@+id/note_c2" />
+        app:layout_constraintTop_toBottomOf="@+id/note_c2">
 
-    <Button
+        <TextView
+            android:id="@+id/textC3"
+            android:fontFamily="cursive"
+            android:textSize="50sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/octave3"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/statusC3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statusC3"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="43sp"
+            android:layout_marginTop="80sp"
+            android:gravity="center"
+            android:text="@string/note_bad"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/note_c4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="C4"
+        android:layout_width="match_parent"
+        android:layout_height="140sp"
+        android:layout_marginTop="12sp"
+        android:clickable="true"
+        android:focusable="false"
+        android:background="@color/itemBG"
         app:layout_constraintBottom_toTopOf="@+id/note_c5"
-        app:layout_constraintStart_toStartOf="@+id/note_c3"
-        app:layout_constraintTop_toBottomOf="@+id/note_c3" />
+        app:layout_constraintTop_toBottomOf="@+id/note_c3">
 
-    <Button
+        <TextView
+            android:id="@+id/textC4"
+            android:fontFamily="cursive"
+            android:textSize="50sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/octave4"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/statusC4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statusC4"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="43sp"
+            android:layout_marginTop="80sp"
+            android:gravity="center"
+            android:text="@string/note_bad"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/note_c5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="C5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/note_c4"
-        app:layout_constraintTop_toBottomOf="@+id/note_c4" />
+        android:layout_width="match_parent"
+        android:layout_height="140sp"
+        android:layout_marginBottom="8sp"
+        android:layout_marginTop="12sp"
+        android:clickable="true"
+        android:focusable="false"
+        android:background="@color/itemBG"
+        app:layout_constraintTop_toBottomOf="@+id/note_c4">
 
-    <TextView
-        android:id="@+id/textViewC2"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_width="134dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/note_bad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/note_c2"
-        app:layout_constraintTop_toTopOf="@+id/note_c2" />
+        <TextView
+            android:id="@+id/textC5"
+            android:fontFamily="cursive"
+            android:textSize="50sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="@string/octave5"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/statusC5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/statusC5"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="18sp"
+            android:textColor="@color/fontColor"
+            android:layout_width="match_parent"
+            android:layout_height="43sp"
+            android:layout_marginTop="80sp"
+            android:gravity="center"
+            android:text="@string/note_bad"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/textViewC5"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_width="134dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/note_bad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toEndOf="@+id/note_c5"
-        app:layout_constraintTop_toTopOf="@+id/note_c5" />
-
-    <TextView
-        android:id="@+id/textViewC4"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_width="134dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/note_bad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toEndOf="@+id/note_c4"
-        app:layout_constraintTop_toTopOf="@+id/note_c4" />
-
-    <TextView
-        android:id="@+id/textViewC3"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:layout_width="134dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/note_bad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/note_c3"
-        app:layout_constraintTop_toTopOf="@+id/note_c3" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

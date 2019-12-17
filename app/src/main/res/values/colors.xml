@@ -4,9 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorGood">#00AA00</color>
-    <color name="colorBad">#BB0000</color>
-    <color name="colorGraphBG">#000000</color>
-    <color name="colorLine">#FFFF00</color>
-    <color name="colorNote">#FFFF77</color>
-
+    <color name="colorBad">#DD0000</color>
+    <color name="colorGraphBG">#00000000</color>
+    <color name="colorLine">#CCCC00</color>
+    <color name="colorNote">#DDDD00</color>
+    <color name="fontColor">#FFFFFF</color>
+    <color name="itemBG">#33000000</color>
 </resources>

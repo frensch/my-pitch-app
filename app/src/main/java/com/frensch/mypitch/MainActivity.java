@@ -1,14 +1,14 @@
-package com.tvglobo.ped.mypitch;
+package com.frensch.mypitch;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,34 +22,34 @@ public class MainActivity extends AppCompatActivity {
 
         requestAudioPermissions();
 
-        Button buttonC2 = findViewById(R.id.note_c2);
+        ConstraintLayout buttonC2 = findViewById(R.id.note_c2);
         buttonC2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startMain("C2");
+                startTuneTest("C2");
             }
         });
-        Button buttonC3 = findViewById(R.id.note_c3);
+        ConstraintLayout buttonC3 = findViewById(R.id.note_c3);
         buttonC3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startMain("C3");
+                startTuneTest("C3");
             }
         });
-        Button buttonC4 = findViewById(R.id.note_c4);
+        ConstraintLayout buttonC4 = findViewById(R.id.note_c4);
         buttonC4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startMain("C4");
+                startTuneTest("C4");
             }
         });
-        Button buttonC5 = findViewById(R.id.note_c5);
+        ConstraintLayout buttonC5 = findViewById(R.id.note_c5);
         buttonC5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startMain("C5");
+                startTuneTest("C5");
             }
         });
 
     }
 
-    private void startMain(String note) {
+    private void startTuneTest(String note) {
         Intent intent = new Intent(this, TuneTest.class);
         String message = note;
         intent.putExtra(NOTE_PITCH, message);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Go ahead with recording audio now
-            //startMain("c2");
+            //startTuneTest("c2");
         }
     }
 
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay!
-                    //startMain();
+                    //startTuneTest();
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.

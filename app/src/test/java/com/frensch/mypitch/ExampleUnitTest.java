@@ -1,4 +1,4 @@
-package com.tvglobo.ped.mypitch;
+package com.frensch.mypitch;
 
 import org.junit.Test;
 

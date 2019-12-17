@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">My Pitch</string>
-    <string name="note_good">Good</string>
-    <string name="note_bad">Bad</string>
+    <string name="note_none">Status: None</string>
+    <string name="note_good">Status: Good</string>
+    <string name="note_bad">Status: Bad</string>
+    <string name="octave2">Second Octave</string>
+    <string name="octave3">Third Octave</string>
+    <string name="octave4">Fourth Octave</string>
+    <string name="octave5">Fith Octave</string>
 </resources>

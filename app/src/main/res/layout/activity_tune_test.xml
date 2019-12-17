@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGraphBG"
+    android:background = "@drawable/bg1"
     tools:context=".TuneTest">
 
     <android.support.constraint.Guideline
@@ -32,7 +32,7 @@
         android:id="@+id/chart1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH"
         app:layout_constraintTop_toTopOf="parent"
@@ -68,32 +68,59 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_note" />
 
     <Button
+        android:id="@+id/buttonPrevious"
+        android:layout_width="wrap_content"
+        android:layout_height="80sp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/itemBG"
+        android:textColor="@color/fontColor"
+        android:text="Prev"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonRec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH" />
+
+    <Button
         android:id="@+id/buttonRec"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="80sp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/itemBG"
         android:text="Rec"
+        android:textColor="@color/fontColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV"
+        app:layout_constraintStart_toEndOf="@+id/buttonPrevious"
+        app:layout_constraintEnd_toStartOf="@+id/buttonTone"
         app:layout_constraintTop_toBottomOf="@+id/guidelineH" />
+
 
     <Button
         android:id="@+id/buttonTone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="80sp"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimary"
+        android:background="@color/itemBG"
         android:text="Tone"
+        android:textColor="@color/fontColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonRec"
+        app:layout_constraintEnd_toStartOf="@+id/buttonNext"
         app:layout_constraintTop_toBottomOf="@+id/guidelineH" />
 
+
+    <Button
+        android:id="@+id/buttonNext"
+        android:layout_width="wrap_content"
+        android:layout_height="80sp"
+        android:layout_marginEnd="5sp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/itemBG"
+        android:textColor="@color/fontColor"
+        android:text="Next"
+        app:layout_constraintStart_toEndOf="@+id/buttonTone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH" />
 
 </android.support.constraint.ConstraintLayout>

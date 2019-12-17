@@ -1,4 +1,4 @@
-package com.tvglobo.ped.mypitch;
+package com.frensch.mypitch;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -42,6 +42,7 @@ public class TuneTest extends AppCompatActivity {
     private static final String TAG = "TuneTest";
     private LineChart mChart;
     private Thread thread;
+    private Thread audioThread;
     private boolean plotData = true;
 
     private String noteToTest;
@@ -52,10 +53,24 @@ public class TuneTest extends AppCompatActivity {
     private boolean recValues = false;
     private ArrayList<Float> valuesSaved = new ArrayList();
     private PlayTone playTone = null;
+    private AudioProcessor pitchProcessor;
 
+    public static final String NOTE_PITCH = "";
+    private void backToMain() {
+        Intent intent = new Intent(this, MainActivity.class);
+        String message = noteToTest;
+        intent.putExtra(NOTE_PITCH, message);
+        startActivity(intent);
+        //onDestroy();
+    }
+    @Override
+    public void onBackPressed() {
+        backToMain();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        super.onCreate(null);
+
         setContentView(R.layout.activity_tune_test);
 
 
@@ -118,7 +133,7 @@ public class TuneTest extends AppCompatActivity {
         mChart = findViewById(R.id.chart1);
 
         // enable description text
-        mChart.getDescription().setEnabled(true);
+        mChart.getDescription().setEnabled(false);
 
         // enable touch gestures
         mChart.setTouchEnabled(true);
@@ -151,10 +166,13 @@ public class TuneTest extends AppCompatActivity {
         xl.setTextColor(getApplicationContext().getResources().getColor(R.color.colorGraphBG));
         xl.setDrawGridLines(true);
         xl.setAvoidFirstLastClipping(true);
+        xl.setAxisLineColor(getApplicationContext().getResources().getColor(R.color.colorGraphBG));
+        xl.setGridColor(getApplicationContext().getResources().getColor(R.color.colorGraphBG));
         xl.setEnabled(true);
 
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTextColor(getApplicationContext().getResources().getColor(R.color.colorGraphBG));
+        leftAxis.setAxisLineColor(getApplicationContext().getResources().getColor(R.color.colorGraphBG));
         leftAxis.setDrawGridLines(false);
         leftAxis.setAxisMaximum(noteMaxFreq);
         leftAxis.setAxisMinimum(noteMinFreq);
@@ -190,7 +208,7 @@ public class TuneTest extends AppCompatActivity {
                 data.addDataSet(set);
             }
 
-//            data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 80) + 10f), 0);
+//          data.addEntry(new Entry(set.getEntryCount(), (float) (Math.random() * 80) + 10f), 0);
             data.addEntry(new Entry(set.getEntryCount(), value), 0);
             data.notifyDataChanged();
 
@@ -241,7 +259,6 @@ public class TuneTest extends AppCompatActivity {
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
                 }
@@ -257,6 +274,11 @@ public class TuneTest extends AppCompatActivity {
 
         if (thread != null) {
             thread.interrupt();
+            thread = null;
+        }
+        if(dispatcher != null) {
+            dispatcher.stop();
+            dispatcher.removeAudioProcessor(pitchProcessor);
         }
     }
 
@@ -266,7 +288,14 @@ public class TuneTest extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        thread.interrupt();
+        if (thread != null) {
+            thread.interrupt();
+            thread = null;
+        }
+        if(dispatcher != null) {
+            dispatcher.stop();
+            dispatcher.removeAudioProcessor(pitchProcessor);
+        }
         super.onDestroy();
     }
 
@@ -285,10 +314,10 @@ public class TuneTest extends AppCompatActivity {
                 });
             }
         };
-        AudioProcessor pitchProcessor = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
+        pitchProcessor = new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN, 22050, 1024, pdh);
         dispatcher.addAudioProcessor(pitchProcessor);
 
-        Thread audioThread = new Thread(dispatcher, "Audio Thread");
+        audioThread = new Thread(dispatcher, "Audio Thread");
         audioThread.start();
     }
     float mFreq = 0;
